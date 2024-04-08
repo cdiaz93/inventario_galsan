@@ -1,0 +1,5 @@
+Para compilar bien este proyecto se uso:
+Laravel 5.8
+Vue.js 2.5.17
+NodeJs 20.11.0 (localhost)
+Python 2.7.18(150)
