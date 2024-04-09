@@ -27,6 +27,7 @@ class InventoryController extends Controller
     public function index()
     {
         $inventario = Inventory::all();
+        // dd($inventario);
         return response()->json($inventario);
     }
 

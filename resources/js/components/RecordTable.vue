@@ -100,9 +100,9 @@
                                     <v-card-text>
                                         <v-container>
                                             <v-row>
-                                                <v-col cols="12" sm="6" md="2">
+                                                <!-- <v-col cols="12" sm="6" md="2">
                                                     <v-text-field v-model="articulo.id" label="ID"></v-text-field>
-                                                </v-col>
+                                                </v-col> -->
                                                 <v-col cols="12" sm="6" md="2">
                                                     <v-text-field v-model="articulo.codigo_interno" label="Codigo Interno"></v-text-field>
                                                 </v-col>
@@ -123,7 +123,7 @@
                                                     <v-text-field v-model="articulo.serial" label="Serial"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="6" md="2">
-                                                    <v-text-field v-model="articulo.segemento" label="Segemento"></v-text-field>
+                                                    <v-text-field v-model="articulo.segemento" label="Segmento"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="6" md="2">
                                                     <v-text-field v-model="articulo.lineas" label="Linea"></v-text-field>
@@ -396,18 +396,13 @@
                 // Encabezados de la tabla
                 headers: [
                     { text: 'Acciones', value: 'actions', sortable: false },
-                    {
-                        text: 'ID',
-                        align: 'start',
-                        sortable: true,
-                        value: 'id',
-                    },
+
                     { text: 'Codigo interno', value: 'codigo_interno' },
                     { text: 'Referencia Fabrica', value: 'referencia_fabrica' },
                     { text: 'Referencia Articulo', value: 'referencia_articulo' },
                     { text: 'Numero Serial', value: 'serial' },
 
-                    { text: 'Segemento', value: 'segmento' },
+                    { text: 'Segemento', value: 'segemento' },
                     { text: 'Lineas', value: 'lineas' },
                     { text: 'Marca', value: 'marca' },
                     { text: 'Tipo marca', value: 'tipo_marca' },
@@ -453,7 +448,7 @@
         },
         watch: {
             modalNew (val) {
-                val || this.close()
+                val || this.closeModalNew()
             },
             dialogDelete (val) {
                 val || this.closeDelete()
@@ -481,6 +476,7 @@
             consultarInventario() {
                 axios.get('/inventory')
                     .then(response => {
+                        console.log(response.data)
                     this.inventarios = response.data;
 
                 }).catch(error => {
@@ -562,7 +558,7 @@
             guardarArticulo() {
                 const inventario = { ...this.articulo };
                 axios.post('inventory', inventario).then(response => {
-                    this.close()
+                    this.closeModalNew()
                     this.snackbar.message = response.data.message;
                     this.snackbar.show = true;
 
@@ -599,8 +595,8 @@
                             this.articulo = Object.assign({}, this.defaultArticulo)
                             this.editedIndex = -1
                         })
-                        this.snackbar.message = response.data.message;
-                        this.snackbar.show = true;
+                        // this.snackbar.message = response.data.message;
+                        // this.snackbar.show = true;
                     }
 
                 }).catch(error => {
@@ -642,7 +638,7 @@
                 const id= this.articulo.id;
                 const inventario = { ...this.articulo };
                 axios.put(`inventory/${id}`, inventario).then(response => {
-                    this.close()
+                    this.closeModalEdit();
                     this.snackbar.message = response.data.message;
                     this.snackbar.show = true;
 

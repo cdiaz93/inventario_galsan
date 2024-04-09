@@ -2260,11 +2260,6 @@ var _usuario_actual = document.head.querySelector('meta[name="usuario-actual"]')
         value: 'actions',
         sortable: false
       }, {
-        text: 'ID',
-        align: 'start',
-        sortable: true,
-        value: 'id'
-      }, {
         text: 'Codigo interno',
         value: 'codigo_interno'
       }, {
@@ -2278,7 +2273,7 @@ var _usuario_actual = document.head.querySelector('meta[name="usuario-actual"]')
         value: 'serial'
       }, {
         text: 'Segemento',
-        value: 'segmento'
+        value: 'segemento'
       }, {
         text: 'Lineas',
         value: 'lineas'
@@ -2336,7 +2331,7 @@ var _usuario_actual = document.head.querySelector('meta[name="usuario-actual"]')
   },
   watch: {
     modalNew: function modalNew(val) {
-      val || this.close();
+      val || this.closeModalNew();
     },
     dialogDelete: function dialogDelete(val) {
       val || this.closeDelete();
@@ -2356,6 +2351,7 @@ var _usuario_actual = document.head.querySelector('meta[name="usuario-actual"]')
     consultarInventario: function consultarInventario() {
       var _this2 = this;
       axios.get('/inventory').then(function (response) {
+        console.log(response.data);
         _this2.inventarios = response.data;
       })["catch"](function (error) {
         console.error('Error al obtener datos:', error);
@@ -2431,7 +2427,7 @@ var _usuario_actual = document.head.querySelector('meta[name="usuario-actual"]')
       var _this5 = this;
       var inventario = _objectSpread({}, this.articulo);
       axios.post('inventory', inventario).then(function (response) {
-        _this5.close();
+        _this5.closeModalNew();
         _this5.snackbar.message = response.data.message;
         _this5.snackbar.show = true;
 
@@ -2467,8 +2463,8 @@ var _usuario_actual = document.head.querySelector('meta[name="usuario-actual"]')
             _this7.articulo = Object.assign({}, _this7.defaultArticulo);
             _this7.editedIndex = -1;
           });
-          _this7.snackbar.message = response.data.message;
-          _this7.snackbar.show = true;
+          // this.snackbar.message = response.data.message;
+          // this.snackbar.show = true;
         }
       })["catch"](function (error) {
         alert('Hubo un error al guardar la información. Consulte la consola para mas detalles.');
@@ -2505,7 +2501,7 @@ var _usuario_actual = document.head.querySelector('meta[name="usuario-actual"]')
       var id = this.articulo.id;
       var inventario = _objectSpread({}, this.articulo);
       axios.put("inventory/".concat(id), inventario).then(function (response) {
-        _this9.close();
+        _this9.closeModalEdit();
         _this9.snackbar.message = response.data.message;
         _this9.snackbar.show = true;
 
@@ -2908,23 +2904,6 @@ var render = function render() {
     }
   }, [_c("v-text-field", {
     attrs: {
-      label: "ID"
-    },
-    model: {
-      value: _vm.articulo.id,
-      callback: function callback($$v) {
-        _vm.$set(_vm.articulo, "id", $$v);
-      },
-      expression: "articulo.id"
-    }
-  })], 1), _vm._v(" "), _c("v-col", {
-    attrs: {
-      cols: "12",
-      sm: "6",
-      md: "2"
-    }
-  }, [_c("v-text-field", {
-    attrs: {
       label: "Codigo Interno"
     },
     model: {
@@ -3033,7 +3012,7 @@ var render = function render() {
     }
   }, [_c("v-text-field", {
     attrs: {
-      label: "Segemento"
+      label: "Segmento"
     },
     model: {
       value: _vm.articulo.segemento,
@@ -99340,8 +99319,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\lara58\blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\lara58\blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\inventario_galsan_24\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\inventario_galsan_24\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

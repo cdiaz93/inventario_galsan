@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +177,8 @@ return [
 
 
         Maatwebsite\Excel\ExcelServiceProvider::class,  //Proovedor de Excel Import/Export de Maatwebsite
+
+        Laraveles\Spanish\SpanishServiceProvider::class,
 
     ],
 
